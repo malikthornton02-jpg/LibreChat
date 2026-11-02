@@ -1,14 +1,13 @@
-# THE JOINT Studio LibreChat configuration
-# Secrets are supplied by the runtime environment, never committed to Git.
+# THE JOINT Studio: LibreChat configuration
+# Notion uses its official hosted MCP endpoint and interactive OAuth.
+# No Notion token is stored in Git or launched as an unverified npm subprocess.
+# After deployment, connect Notion once from LibreChat's MCP tool settings.
 version: 1.3.18
 cache: true
 
 mcpServers:
   notion:
-    type: stdio
-    command: npx
-    args:
-      - -y
-      - easy-notion-mcp
-    env:
-      NOTION_API_KEY: "${NOTION_API_KEY}"
+    type: streamable-http
+    url: https://mcp.notion.com/mcp
+    requiresOAuth: true
+    timeout: 60000
